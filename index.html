@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>[📊 UPD 64 + 🕷️Event] Anime Last Stand — Market & Carries</title>
+  <meta name="description" content="Colorful, kid‑friendly Anime Last Stand marketplace with big hero image and buttons. Single file (HTML+CSS+JS)." />
+  <meta name="theme-color" content="#a855f7" />
+  <style>
+    /* ---------- Base ---------- */
+    *,*::before,*::after{box-sizing:border-box}
+    :root{
+      --bg:#0b1020; --ink:#f8fafc; --muted:#c7d2fe; --line:#ffffff22;
+      --p1:#a855f7; --p2:#ec4899; --p3:#22d3ee; --p4:#f59e0b; --p5:#22c55e;
+      --radius:22px; --shadow:0 18px 50px rgba(2,8,23,.45); --max:1200px; --nav:70px;
+    }
+    html,body{height:100%}
+    body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;color:var(--ink);background:radial-gradient(1200px 700px at 10% -10%, #a855f733 0%, transparent 60%),radial-gradient(1200px 800px at 90% 10%, #ec489933 0%, transparent 60%),radial-gradient(1200px 900px at 50% 120%, #22d3ee22 0%, transparent 60%),#0b1020;scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:var(--max);margin-inline:auto;padding:0 20px}
+    section{padding:72px 0}
+    h1,h2,h3{line-height:1.15;margin:0 0 .4rem}
+
+    /* ---------- Header ---------- */
+    header{position:sticky;top:0;z-index:20;background:linear-gradient(180deg,rgba(8,10,24,.92),rgba(8,10,24,.6) 60%,transparent);backdrop-filter:saturate(160%) blur(10px);border-bottom:1px solid var(--line)}
+    .nav{height:var(--nav);display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:.7rem;font-weight:900}
+    .logo{width:40px;height:40px;border-radius:12px;background:conic-gradient(from 180deg,var(--p1),var(--p2),var(--p3));box-shadow:0 8px 24px #a855f777}
+    .name{background:linear-gradient(90deg,var(--p1),var(--p2),var(--p3));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .menu{display:flex;gap:22px;align-items:center}
+    .burger{display:none;place-items:center;width:42px;height:42px;border:1px solid #ffffff30;border-radius:12px}
+    #mobileMenu[hidden]{display:none}
+
+    /* ---------- Hero with top game picture ---------- */
+    .hero{position:relative;padding:56px 0 24px}
+    .hero .cover{position:relative;border-radius:28px;border:1px solid var(--line);overflow:hidden;box-shadow:var(--shadow);background:#0b1020}
+    .hero .bg{position:absolute;inset:0;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAApYAAAKYCAIAAABGmi8tAAAAA3NCSVQICAjb4U/g...gAQKFRRBV7OFpbhVQzFatO8sdDEBTWjenmu/AGU5fbMCuxDdAAAAAElFTkSuQmCC);background-size:cover;background-position:center;opacity:.6;transform:scale(1.02);will-change:transform}
+    .hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg,#0b1020aa 0%, #0b102066 35%, #0b1020cc 100%)}
+    .hero .content{position:relative;z-index:2;padding:38px 22px;display:grid;place-items:center;text-align:center}
+    .big{font-size:clamp(2rem,6vw,3rem)}
+    .rainbow{background:linear-gradient(90deg,var(--p1),var(--p2),var(--p3),var(--p1));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:14px}
+    .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 1.2rem;border-radius:999px;border:1px solid #ffffff33;background:linear-gradient(135deg,#1f2937bb,#0b1220bb);box-shadow:var(--shadow);transition:transform .15s ease,border-color .2s ease}
+    .btn:hover{transform:translateY(-2px);border-color:#ffffff66}
+    .btn.primary{border:0;background:linear-gradient(135deg,var(--p3),var(--p1))}
+    .btn.pink{border:0;background:linear-gradient(135deg,var(--p2),#f43f5e)}
+    .btn.orange{border:0;background:linear-gradient(135deg,var(--p4),#fb923c)}
+    .btn.purple{border:0;background:linear-gradient(135deg,var(--p1),#7c3aed)}
+
+    /* ---------- Cards / Grids ---------- */
+    .card{background:#0f172a99;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}
+    .grid{display:grid;gap:18px}
+    .grid.f3{grid-template-columns:repeat(3,1fr)}
+    .grid.f4{grid-template-columns:repeat(4,1fr)}
+
+    /* ---------- Pricing ---------- */
+    .pricing{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
+    .price{font-size:2rem;font-weight:900;margin:.2rem 0 .6rem}
+    .feat{color:#cbd5e1}
+
+    /* ---------- Forms ---------- */
+    .builder{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+    input,select,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #334155;background:#0b1220cc;color:#e2e8f0}
+    input:focus,select:focus,textarea:focus{outline:none;border-color:#7c3aed;box-shadow:0 0 0 4px #7c3aed33}
+
+    /* ---------- Footer ---------- */
+    footer{padding:56px 0;border-top:1px solid var(--line);background:#0a0f20cc}
+
+    /* ---------- Responsive ---------- */
+    @media (max-width:1100px){.menu{display:none}.burger{display:grid}.builder{grid-template-columns:1fr}.pricing{grid-template-columns:1fr}.grid.f4{grid-template-columns:1fr 1fr}}
+    @media (max-width:640px){.grid.f4{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="ALS home">
+        <span class="logo" aria-hidden="true"></span>
+        <span class="name">[📊 UPD 64 + 🕷️Event] Anime Last Stand</span>
+      </a>
+      <nav class="menu" aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="#catalog">Units</a>
+        <a href="#builder">Order</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" hidden>
+      <div class="container" style="padding-bottom:12px">
+        <div style="display:grid;gap:10px">
+          <a href="#services">Services</a>
+          <a href="#catalog">Units</a>
+          <a href="#builder">Order</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero with top image -->
+  <main id="home" class="hero">
+    <div class="container">
+      <div class="cover">
+        <div class="bg" aria-hidden="true"></div>
+        <div class="overlay" aria-hidden="true"></div>
+        <div class="content">
+          <h1 class="big">Cys Macros × <span class="rainbow">Anime Last Stand</span></h1>
+          <p class="muted" style="max-width:70ch">Fast, colorful, kid‑friendly page. Big buttons for quick actions, just like the screenshot you sent. Scroll for services, units, and the order builder.</p>
+          <div class="actions">
+            <a class="btn primary" href="#downloads">⬇️ Downloads</a>
+            <a class="btn purple" href="#setup">🛠️ Setup Guide</a>
+            <a class="btn orange" href="#faq">❓ FAQ</a>
+            <a class="btn pink" href="#contact">💬 Join Discord</a>
+          </div>
+          <div style="height:14px"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Services / Pricing -->
+  <section id="services">
+    <div class="container">
+      <h2>Services & Pricing</h2>
+      <p class="muted">Edit prices anytime.</p>
+      <div class="pricing">
+        <div class="card" style="padding:18px">
+          <h3>Event AFK</h3>
+          <div class="price">$4.99</div>
+          <p class="muted">5‑hour Event/Portal/Raid AFK while you’re in lobby with us.</p>
+          <div class="feat">✔ Private lobby</div>
+          <div class="feat">✔ Hourly drop summary</div>
+          <div class="feat">✔ One pause/resume</div>
+          <br><button class="btn primary" data-add="Event AFK|4.99">Add to order</button>
+        </div>
+        <div class="card" style="padding:18px">
+          <h3>Carry Packs</h3>
+          <div class="price">$3.99+</div>
+          <p class="muted">Boss Rush, Dungeons, Infinity Castle, and more.</p>
+          <div class="feat">✔ Choose target & team</div>
+          <div class="feat">✔ Up to 3 retries</div>
+          <div class="feat">✔ ETA per run</div>
+          <br><button class="btn" data-add="Carry Pack|3.99">Add to order</button>
+        </div>
+        <div class="card" style="padding:18px">
+          <h3>Custom Farm</h3>
+          <div class="price">$?</div>
+          <p class="muted">Tell us the unit/item/material you want. We’ll quote it.</p>
+          <div class="feat">✔ Free consult</div>
+          <div class="feat">✔ Multi‑session discounts</div>
+          <div class="feat">✔ Clips/screenshots proof</div>
+          <br><button class="btn" data-add="Custom Farm|0">Describe in order</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Units (examples) -->
+  <section id="catalog">
+    <div class="container">
+      <h2>Popular Units (examples)</h2>
+      <p class="muted">Godly • Ultimate • Celestial • Mythic. Update as meta changes.</p>
+      <div class="grid f4">
+        <div class="card" style="padding:16px"><strong>Pride (The One)</strong><div class="muted">Godly</div></div>
+        <div class="card" style="padding:16px"><strong>Wukong (Supreme God)</strong><div class="muted">Godly</div></div>
+        <div class="card" style="padding:16px"><strong>Zuffy (Sun God)</strong><div class="muted">Godly</div></div>
+        <div class="card" style="padding:16px"><strong>Heavenly King</strong><div class="muted">Godly</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Order Builder -->
+  <section id="builder">
+    <div class="container">
+      <h2>Build your order</h2>
+      <p class="muted">Generates a Discord‑ready summary. No payments here.</p>
+      <div class="builder">
+        <form id="orderForm" class="card" style="padding:16px;display:grid;gap:12px">
+          <div style="display:grid;gap:8px;grid-template-columns:1fr 1fr">
+            <div><label for="roblox">Roblox username</label><input id="roblox" required placeholder="Your username"></div>
+            <div><label for="discord">Discord</label><input id="discord" required placeholder="name#0000"></div>
+          </div>
+          <div><label for="mode">Mode</label><select id="mode"><option>Event / Portal</option><option>Raid</option><option>Dungeon</option><option>Boss Rush</option><option>Infinity Castle</option><option>Elemental Caverns</option><option>Story</option><option>Infinite</option><option>Survival</option></select></div>
+          <div><label for="target">Target unit/item (optional)</label><input id="target" placeholder="e.g., Wukong evo items"></div>
+          <div style="display:grid;gap:8px;grid-template-columns:1fr 1fr">
+            <div><label for="hours">AFK/Carry hours</label><input id="hours" type="number" min="1" value="5"></div>
+            <div><label for="timezone">Your timezone</label><input id="timezone" placeholder="UTC+3 (Kuwait)"></div>
+          </div>
+          <div class="card" style="padding:12px;background:#0b122066;border:1px dashed #a855f7aa">
+            <strong>Add services</strong>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+              <button type="button" class="btn" data-add="Event AFK|4.99">Event AFK (5h) — $4.99</button>
+              <button type="button" class="btn" data-add="Carry Pack|3.99">Carry Pack — from $3.99</button>
+              <button type="button" class="btn" data-add="Custom Farm|0">Custom Farm — quote</button>
+            </div>
+          </div>
+          <div><button type="button" class="btn primary" id="makeSummary">Generate summary</button></div>
+        </form>
+        <div class="card" style="padding:16px">
+          <h3>Order summary</h3>
+          <pre id="summary" style="white-space:pre-wrap;background:#0b1220cc;border:1px solid #334155;border-radius:12px;padding:12px;min-height:180px">(Your summary will appear here…)</pre>
+          <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="copy">Copy</button><a class="btn primary" id="whisper" href="#">Send via Discord (paste)</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <h2>FAQ</h2>
+      <details><summary><strong>Account access?</strong></summary><p class="muted">Never. We only co‑play in a private lobby.</p></details>
+      <details><summary><strong>Allowed?</strong></summary><p class="muted">We don’t sell in‑game items/currency or ask for account access. We provide co‑play time while you’re present and follow each mode’s rules.</p></details>
+      <details><summary><strong>Refunds?</strong></summary><p class="muted">If we can’t deliver the agreed run, you can reschedule or get a refund. If you disconnect repeatedly or an event ends mid‑session, we’ll pro‑rate fairly.</p></details>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <form class="card" onsubmit="event.preventDefault(); alert('Thanks! We will reach out on Discord.');" style="padding:16px;display:grid;gap:12px;grid-template-columns:1fr 1fr">
+        <div><label for="cname">Name</label><input id="cname" required placeholder="Your name"></div>
+        <div><label for="cdiscord">Discord</label><input id="cdiscord" required placeholder="name#0000"></div>
+        <div class="full"><label for="cmsg">Message</label><textarea id="cmsg" rows="3" placeholder="Write your message…"></textarea></div>
+        <button class="btn primary full" type="submit">Send</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:10px"><span class="logo" aria-hidden="true"></span><div><strong>[📊 UPD 64 + 🕷️Event] Anime Last Stand</strong><div class="muted" style="font-size:.9rem">© <span id="year"></span> Unofficial fan service. Not affiliated with Roblox or Anime Last Stand.</div></div></div>
+      <div class="muted" style="display:flex;gap:16px"><a href="#services">Services</a><a href="#catalog">Units</a><a href="#builder">Order</a><a href="#faq">FAQ</a></div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const burger=document.getElementById('burger'); const mnu=document.getElementById('mobileMenu');
+    burger?.addEventListener('click',()=>{ const open=!mnu.hasAttribute('hidden'); mnu.toggleAttribute('hidden'); burger.setAttribute('aria-expanded', String(!open)); });
+
+    // Add-to-order buttons
+    const addButtons=document.querySelectorAll('[data-add]'); const items=[];
+    addButtons.forEach(btn=>btn.addEventListener('click',()=>{const [name,price]=btn.dataset.add.split('|'); items.push({name,price:parseFloat(price)}); btn.textContent='Added ✓'; setTimeout(()=>btn.textContent=btn.dataset.add.replace('|',' — $'),900);}));
+
+    // Summary generator
+    const $=(id)=>document.getElementById(id);
+    const sumBtn=$('makeSummary'); if(sumBtn) sumBtn.addEventListener('click',()=>{
+      const data={ roblox:$('roblox').value.trim(), discord:$('discord').value.trim(), mode:$('mode').value, target:$('target').value.trim(), hours:Math.max(1, parseInt($('hours').value||'5')), timezone:$('timezone').value.trim(), items };
+      const total=items.reduce((a,b)=>a+(isNaN(b.price)?0:b.price),0);
+      const lines=[`ALS Order — ${new Date().toLocaleString()}`, `Roblox: ${data.roblox}`, `Discord: ${data.discord}`, `Mode: ${data.mode}`, data.target?`Target: ${data.target}`:null, `Session: ${data.hours}h`, data.timezone?`Timezone: ${data.timezone}`:null, `Items: ${items.length?items.map(i=>`${i.name} ($${i.price.toFixed(2)})`).join(', '):'—'}`, `Estimated subtotal: $${total.toFixed(2)}`, `Delivery: Private lobby only. No account sharing.`].filter(Boolean).join('\n');
+      $('summary').textContent=lines; });
+
+    // Copy
+    const copy=$('copy'); if(copy) copy.addEventListener('click', async()=>{ try{ await navigator.clipboard.writeText($('summary').textContent); copy.textContent='Copied ✓'; setTimeout(()=>copy.textContent='Copy',900);}catch(e){ alert('Copy failed. Select and copy manually.'); } });
+
+    // Year
+    document.getElementById('year').textContent=new Date().getFullYear();
+  </script>
+</body>
+</html>
