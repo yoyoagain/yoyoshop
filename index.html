@@ -12,43 +12,7 @@
     :root{
       /* Neon anime palette */
       --bg:#0a0a1a;            /* deep indigo */
-      --ink:#f1f5f9;           /* text */<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>[📊 UPD 64 + 🕷️Event] Anime Last Stand — Market & Carries</title>
-  <meta name="description" content="Colorful, kid‑friendly Anime Last Stand marketplace with big hero image and buttons. Single file (HTML+CSS+JS)." />
-  <meta name="theme-color" content="#a855f7" />
-  <style>
-    /* ---------- Base ---------- */
-    *,*::before,*::after{box-sizing:border-box}
-    :root{
-      --bg:#0b1020; --ink:#f8fafc; --muted:#c7d2fe; --line:#ffffff22;
-      --p1:#a855f7; --p2:#ec4899; --p3:#22d3ee; --p4:#f59e0b; --p5:#22c55e;
-      --radius:22px; --shadow:0 18px 50px rgba(2,8,23,.45); --max:1200px; --nav:70px;
-    }
-    html,body{height:100%}
-    body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;color:var(--ink);background:radial-gradient(1200px 700px at 10% -10%, #a855f733 0%, transparent 60%),radial-gradient(1200px 800px at 90% 10%, #ec489933 0%, transparent 60%),radial-gradient(1200px 900px at 50% 120%, #22d3ee22 0%, transparent 60%),#0b1020;scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-    .container{max-width:var(--max);margin-inline:auto;padding:0 20px}
-    section{padding:72px 0}
-    h1,h2,h3{line-height:1.15;margin:0 0 .4rem}
-
-    /* ---------- Header ---------- */
-    header{position:sticky;top:0;z-index:20;background:linear-gradient(180deg,rgba(8,10,24,.92),rgba(8,10,24,.6) 60%,transparent);backdrop-filter:saturate(160%) blur(10px);border-bottom:1px solid var(--line)}
-    .nav{height:var(--nav);display:flex;align-items:center;justify-content:space-between}
-    .brand{display:flex;align-items:center;gap:.7rem;font-weight:900}
-    .logo{width:40px;height:40px;border-radius:12px;background:conic-gradient(from 180deg,var(--p1),var(--p2),var(--p3));box-shadow:0 8px 24px #a855f777}
-    .name{background:linear-gradient(90deg,var(--p1),var(--p2),var(--p3));-webkit-background-clip:text;background-clip:text;color:transparent}
-    .menu{display:flex;gap:22px;align-items:center}
-    .burger{display:none;place-items:center;width:42px;height:42px;border:1px solid #ffffff30;border-radius:12px}
-    #mobileMenu[hidden]{display:none}
-
-    /* ---------- Hero with top game picture ---------- */
-    .hero{position:relative;padding:56px 0 24px}
-
+      --ink:#f1f5f9;           /* text */
       --muted:#cbd5e1;         /* secondary text */
       --brand:#a855f7;         /* purple */
       --brand2:#ec4899;        /* pink */
@@ -56,7 +20,7 @@
       --line:#ffffff24;        /* subtle borders */
       --card:#0f172a99;        /* glass card */
       --radius:22px;
-      --shadow:0 18px 50px rgba(0,0,0,.45);
+      --shadow:0 10px 30px rgba(0,0,0,.35);
       --max:1200px;
       --nav:68px;
     }
@@ -70,7 +34,7 @@
     img{max-width:100%;display:block}
     .container{max-width:var(--max);margin-inline:auto;padding:0 20px}
     h1,h2,h3{line-height:1.15;margin:0 0 .35rem}
-    section{padding:76px 0}
+    section{padding:76px 0; content-visibility:auto; contain-intrinsic-size: 800px 600px;}
 
     /* -------------- Background image + overlays -------------- */
     body::before{content:none !important; background:none !important;}
@@ -78,7 +42,7 @@
 
     /* -------------- Fun particles (stars) -------------- */
     .sky{position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden}
-    .star{position:absolute;width:8px;height:8px;border-radius:50%;background:conic-gradient(from 180deg, var(--brand), var(--brand2), var(--brand3), var(--brand));box-shadow:0 0 12px #ffffff66;opacity:.7;will-change:transform;transform:translateZ(0);animation:float 12s linear infinite;}
+    .star{position:absolute;width:8px;height:8px;border-radius:50%;background:#ffffff;box-shadow:0 0 12px #ffffff66;opacity:.7;will-change:transform;transform:translateZ(0);animation:float 12s linear infinite;}
     @keyframes float{ 0%{ transform:translateY(110vh) rotate(0deg)} 100%{ transform:translateY(-10vh) rotate(360deg)} }
 
     /* -------------- Buttons / Chips -------------- */
@@ -113,7 +77,7 @@
     .hero{padding:64px 0 24px}
     .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
     .title{font-size:clamp(2.1rem,6.6vw,3.4rem)}
-    .rainbow{background:linear-gradient(90deg,var(--brand),var(--brand2),var(--brand3),var(--brand)); -webkit-background-clip:text; background-clip:text; color:transparent; animation:hue 6s linear infinite}
+    .rainbow{background:linear-gradient(90deg,var(--brand),var(--brand2),var(--brand3),var(--brand)); -webkit-background-clip:text; background-clip:text; color:transparent; animation:none}
     @keyframes hue{from{filter:hue-rotate(0deg)}to{filter:hue-rotate(360deg)}}
     .subtitle{font-size:clamp(1rem,3vw,1.2rem); color:var(--muted); max-width:62ch}
     .screen{position:relative}
@@ -149,6 +113,7 @@
       .catalog{grid-template-columns:1fr 1fr}
     }
     @media (max-width:640px){ .catalog{grid-template-columns:1fr} }
+  @media (prefers-reduced-motion: reduce){ .star{animation:none !important} .rainbow{animation:none !important} }
   </style>
 </head>
 <body>
@@ -428,13 +393,13 @@
   <script>
     // Inject cute floating stars
     const sky=document.querySelector('.sky');
-    for(let i=0;i<24;i++){
+    const STAR_COUNT = window.matchMedia('(max-width: 800px)').matches ? 8 : 14; for(let i=0;i<STAR_COUNT;i++){
       const s=document.createElement('div'); s.className='star';
       s.style.left=Math.random()*100+'vw';
       s.style.animationDuration=(6+Math.random()*6)+'s';
       s.style.animationDelay=(-Math.random()*6)+'s';
       s.style.opacity=(.5+.5*Math.random());
-      s.style.filter='hue-rotate('+Math.floor(Math.random()*360)+'deg)';
+      
       s.style.width=s.style.height=(6+Math.random()*10)+'px';
       sky.appendChild(s);
     }
